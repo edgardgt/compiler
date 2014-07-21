@@ -1,0 +1,1 @@
+package compiler.codegen;/* Codegen.java */import compiler.irt.*;public class Codegen{/* Campos Codegen*//* Construtor Codegen*/	public Codegen (Irt archivo)throws Exception  {			}/* Metodos Codegen */}

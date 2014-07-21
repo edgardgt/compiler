@@ -1,0 +1,1 @@
+package compiler.opt;/* ConstantFolding.java */public class ConstantFolding{/* Campos ConstantFolding*//* Construtor ConstantFolding*//* Metodos ConstantFolding */}

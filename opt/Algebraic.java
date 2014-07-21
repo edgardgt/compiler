@@ -1,0 +1,1 @@
+package compiler.opt;/* Algebraic.java */public class Algebraic{/* Campos Algebraic*//* Construtor Algebraic*//* Metodos Algebraic */}

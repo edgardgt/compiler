@@ -1,0 +1,1 @@
+package compiler.lib;/* ErrorHandler.java */public class ErrorHandler{	public void main(){		System.out.println("usted ingreso a ErrorHandler");	}}

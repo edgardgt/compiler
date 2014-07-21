@@ -1,0 +1,7 @@
+stage:scan 
+stage:parse 
+stage:ast 
+stage:semantic 
+stage:irt 
+stage:codegen 
+optimizing: algebraic simplification 
