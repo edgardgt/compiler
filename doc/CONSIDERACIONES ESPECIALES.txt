@@ -1,7 +1,12 @@
 Clase SCANNER
-Se modifico el nombre de la clase Scanner.java por el nombre ScannerCLI.java para no tener conflicto con la clase nativa Scanner de JAVA
+----------------------
+Se modifico el nombre de la clase Scanner.java por el nombre ScannerCLI.java para no tener conflicto con la clase nativa Scanner de JAVA.
 
-Si el usuario no ingresa el flag TARGET, el proceso de compilacion tendra como default TARGET scan 
-PENDIENTES
-Reemplazar las combinaciones de TARGETS de manera que se instancie solo una vez cada objeto.
+Valor default de TARGET
+----------------------
+Si el usuario no ingresa el flag TARGET, el proceso de compilacion tendra como default TARGET scan
+
+Valor default de DEBUG
+----------------------
+El parametro -debug puede omitirse, en cuyo caso no se mostrara ningun valor de debug en la pantalla.
 

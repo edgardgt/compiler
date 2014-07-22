@@ -1,0 +1,32 @@
+CLI: MANUAL DE USUARIO
+---------------------------------------------------------------------------------------------------------------------------------------------
+FORMA DE EJECUTAR:
+---------------------
+	java Compiler [-o out_filename] [-target stage] [-opt optimization] [-debug stage] [-h] <in_filename>
+
+	-o out_filename:	Nombre el archivo en el que se almacenara la salida. 
+	-target stage:		Compila hasta cualquiera de las fases del compilador:
+							scan
+							parse
+							ast
+							semantic
+							irt
+							codegen
+						Se puede selecconar uno o mas fases en una misma ejecucion para lo cual se deben separar por medio de dos puntos ":"
+	-opt optmizacion: 	Selecciona el metodo e optimizacion. Sus valores pueden ser:
+							constant 
+							algebra
+	-debug stage:		Permite visualizar en pantalla el estado de la ejecucion, para el stage seleccionado.
+	-h					Permite visualizar esta ayuda
+	
+	
+FUNCIONALIDAD:
+---------------------
+Al ejecutar el programa Compiler, se realizara el proceso de compilacion desde la fase "scan" hasta la fase indicada en el argumento -target
+Si no se especifica el valor de -target, se asumira el valor "scan" como valor default.
+El programa tiene la opcion de mostrar en pantalla las etapas de compilacion ejecutadas, esto se puede indicar a traves del argumento -debug,
+con el cual a contnuacion debe indicar cual es la fase del compilador a debugear. Este argumento es optativo.
+Se puede indicar al programa el tipo de optimizacion a realizar a traves del argumento -opt
+Se puede consultar la sintaxis de linea de comando, a traves de la misma, indicando el argumento -h.
+El argumento in_filename contiene el nombre del archivo de entrada, es decir el programa a compilar, y en el archivo out_filename se indican 
+todas las fases de compilacion

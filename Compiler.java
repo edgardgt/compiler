@@ -11,7 +11,7 @@ import compiler.opt.*;
 public class Compiler{
 
 	public static void main(String[] args) throws Exception {
-		Boolean puedeEjecutar = true; // flag que indica si el programa puede ejecutarse (esto es posible si todos los argumentos son validos)
+		Boolean puedeEjecutar = true; // Indicara si el programa puede ejecutarse si y solo si, los argumentos son validos
 		String archivoSalida = new String(""); //almacena el nombre del archivo donde quedara la salida
 		String opcionTarget = new String(""); //almacena el parametro de la opcion -target
 		String opcionOpt = new String(""); //almacena el parametro de la opcion -opt
@@ -222,14 +222,22 @@ public class Compiler{
 	private static void Help() throws Exception{
 		System.out.println("Compiler, debe ejecutarse de la siguiente manera: ");
 		System.out.println("");
-		System.out.println("java Compiler [option] <filename>");
-		System.out.println("Donde [option] es la accion a realizar.");
-		System.out.println("-o <outname>:		<outname> -> archivo de salida;");
-		System.out.println("-target <stage>:	<stage> -> scan, parse, ast, semantic, irt, codegen;");
-		System.out.println("-opt <optimization>:<optimization> -> constant, algebraic ");
-		System.out.println("-debug <stage>:		<stage> -> uno o varios de scan, parse, ast, semantic, irt, codegen;");
-		System.out.println("-h:			Muestra esta ayuda al usuario.");
+		System.out.println("java Compiler [-o out_filename] [-target stage] [-opt optimization] [-debug stage] [-h] <in_filename>");
 		System.out.println("");
-		System.out.println("ejemplo: java Compiler -o prueba.txt -target codegen -opt algebraic -debug semantic:ast:codegen:scan entrada.txt");
+		
+		System.out.println("-o out_filename:   Nombre el archivo en el que se almacenara la salida. ");
+		System.out.println("-target stage:     Compila hasta cualquiera de las fases del compilador:");
+		System.out.println("                        scan");
+		System.out.println("                        parse");
+		System.out.println("                        ast");
+		System.out.println("                        semantic");
+		System.out.println("                        irt");
+		System.out.println("                        codegen");
+		System.out.println("                   Se puede selecconar uno o mas fases en una misma ejecucion para lo cual se deben separar por medio de dos puntos (:)");
+		System.out.println("-opt optmizacion:  Selecciona el metodo e optimizacion. Sus valores pueden ser:");
+		System.out.println("                        constant ");
+		System.out.println("                        algebra");
+		System.out.println("-debug stage:      Permite visualizar en pantalla el estado de la ejecucion, para el stage seleccionado.");
+		System.out.println("-h                 Permite visualizar esta ayuda");
 	} //fin de Help	
 }
