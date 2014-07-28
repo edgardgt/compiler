@@ -1,0 +1,1 @@
+package compiler.scanner;/* Scanner.java */public class Scanner{/* Campos Scanner*//* Construtor Scanner*/	public Scanner (String archivo)throws Exception  {			}/* Metodos Scanner */}

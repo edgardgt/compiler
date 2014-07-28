@@ -1,1 +1,1 @@
-package compiler.parser;/* CC4Parser.java */import compiler.scanner.*;public class CC4Parser{/* Campos CC4Parser*//* Construtor CC4Parser*/	public CC4Parser (ScannerCLI archivo)throws Exception  {			}/* Metodos CC4Parser */}
+package compiler.parser;/* CC4Parser.java */import compiler.scanner.*;public class CC4Parser{/* Campos CC4Parser*//* Construtor CC4Parser*/	public CC4Parser (Scanner archivo)throws Exception  {			}/* Metodos CC4Parser */}
