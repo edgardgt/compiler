@@ -1,6 +1,9 @@
-options {
-    tokenVocab=Decaf;
+lexer grammar Decaf;
+
+@header{
+    package compiler.scanner;
 }
+
 
 CLASE		:  'class';
 VOID		:  'void';
