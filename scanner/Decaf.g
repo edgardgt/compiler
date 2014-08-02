@@ -61,12 +61,13 @@ DECREMENTA  :  '-=' {System.out.println("DECREMENTA");};
 
 // LITERALES
 //-----------------------------------------------
-HEXA        :  ('0x'|'0X') (DIGITO | 'A'..'F' | 'a'..'f' )+ {System.out.println("LITERAL HEXA");};
-NATURAL		:  (DIGITO)+ {System.out.println("LITERAL NATURAL");};
-REAL		:  (DIGITO)+ '.' DIGITO+ {System.out.println("LITERAL REAL");};
-CHAR        :  ('\'')('\u0020'..'\u007E')('\'') {System.out.println("LITERAL CHAR");};
-STRING      :  ('"') ('\u0020'..'\u007E')('\u0020'..'\u007E')* ('"') {System.out.println("LITERAL STR");};
+CHAR_LITERAL        : ('\'')CHAR('\'') {System.out.println("LITERAL CHAR");};
+STRING_LITERAL      : ('"') CHAR CHAR* ('"') {System.out.println("LITERAL STR");};
+BOOL_LITERAL        : TRUE | FALSE {System.out.println("LITERAL BOOLEAN");};
+INT_LITERAL          : (DECIMAL | HEXA)  {System.out.println("INT_LITERAL");};
+HEXA                 : ('0x'|'0X') (DIGITO | 'A'..'F' | 'a'..'f' )+ {System.out.println("HEX");};;
 
+fragment CHAR        :(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'));
 
   
 // AGRUPADORES
