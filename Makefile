@@ -1,7 +1,12 @@
-make: Compiler.class scanner\Scanner.class parser\CC4Parser.class ast\Ast.class semantic\Semantic.class irt\Irt.class codegen\Codegen.class opt\Algebraic.class opt\ConstantFolding.class lib\Debug.class lib\ErrorHandler.class
+make: scanner\Decaf.java scanner\Decaf.class Compiler.class scanner\Scanner.class parser\CC4Parser.class ast\Ast.class semantic\Semantic.class irt\Irt.class codegen\Codegen.class opt\Algebraic.class opt\ConstantFolding.class lib\Debug.class lib\ErrorHandler.class
 	
 Compiler.class: Compiler.java
 	javac Compiler.java
+scanner\Decaf.java: scanner\Decaf.g
+	java -jar c:\Javalib\antlr-4.1-complete.jar scanner\Decaf.g
+	
+scanner\Decaf.class: scanner\Decaf.java
+	javac scanner\Decaf.java
 	
 scanner\Scanner.class: scanner\Scanner.java
 	javac scanner\Scanner.java
@@ -35,8 +40,8 @@ lib\ErrorHandler.class: lib\ErrorHandler.java
 
 clean:
 	del Compiler.class
-	del scanner\Scanner.class
-	del parser\CC4Parser.class
+	del scanner\*.class scanner\Decaf.java scanner\*.tokens
+	del parser\*.class parser\Decaf*.java parser\Decaf*.tokens
 	del ast\Ast.class
 	del semantic\Semantic.class
 	del irt\Irt.class
