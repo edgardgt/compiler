@@ -4,92 +4,100 @@ lexer grammar Decaf;
     package compiler.scanner;
 }
 
+// OTROS
+//-----------------------------------------------
+WS          : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
+COLON		: ':';
+SEMI        : ';';
+
+COMMENTLIN: '//' (~('\n'| '\r'))* {skip();};
+
+
 //PALABRAS RESERVADAS
 //-----------------------------------------------
-CLASE		:  'class' {System.out.println("CLASE");};
-VOID		:  'void' {System.out.println("VOID");};
-BOOLEAN     :  'boolean' {System.out.println("BOOLEAN");};
-TRUE		:  'true' {System.out.println("TRUE");};
-FALSE		:  'false' {System.out.println("FALSE");};
-INT         :  'int' {System.out.println("INT");};
-FLOAT       :  'float' {System.out.println("FLOAT");};
-IF			:  'if' {System.out.println("IF");};
-ELSE		:  'else' {System.out.println("ELSE");};
-FOR			:  'for' {System.out.println("FOR");};
-RETURN		:  'return' {System.out.println("RETURN");};
-BREAK		:  'break' {System.out.println("BREAK");};
-CONTINUE	:  'continue' {System.out.println("CONTINUE");};
-CALLOUT		:  'callout' {System.out.println("CALLOUT");};
+CLASE		:  'class'   {System.out.println("CLASE");};
+VOID		:  'void'    {System.out.println("VOID");};
+TRUE		:  'true'    {System.out.println("TRUE");};
+FALSE		:  'false'   {System.out.println("FALSE");};
+IF			:  'if'      {System.out.println("IF");};
+ELSE		:  'else'    {System.out.println("ELSE");};
+FOR		    :  'for'     {System.out.println("FOR");};
+RETURN		:  'return'  {System.out.println("RETURN");};
+BREAK		:  'break'   {System.out.println("BREAK");};
+CONTINUE	:  'continue'{System.out.println("CONTINUE");};
+CALLOUT	    :  'callout' {System.out.println("CALLOUT");};
+COMMA       :  ','       {System.out.println("COMMA");};
+//-----------------------------------------------
+TIPO        :  INT | BOOLEAN ;
 
+// LITERALES
+//-----------------------------------------------
+CHAR_LITERAL        : ('\'')(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'))('\'') ;
+//STRING_LITERAL      : ('"') (('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'))(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'))* ('"') ;
 
+//CHAR_LITERAL        : ('\'')CHAR('\'') ;
+STRING_LITERAL      : ('"') CHAR CHAR* ('"') ;
+BOOL_LITERAL        : TRUE | FALSE;
+INT_LITERAL          : (DECIMAL | HEXA);   //{System.out.println("INT_LITERAL");};
+HEXA                 : ('0x'|'0X') (DIGITO | 'A'..'F' | 'a'..'f' )+ ;
+
+//fragment CHAR        :(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'));
+fragment CHAR        :(('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'));
 
 
 // OPERADORES ARITMETICOS
 //-----------------------------------------------
-MAS			:  '+' {System.out.println("MAS");};
-MENOS		:  '-' {System.out.println("MENOS");};
-PROD		:  '*' {System.out.println("PROD");};
-DIV			:  '/' {System.out.println("DIV");};
-MOD			:  '%' {System.out.println("MOD");};
-
-
-// OPERADORES RELACIONALES
-//-----------------------------------------------
-MENORQ 		:  '<' {System.out.println("MENORQ");};
-MAYORQ 		:  '>' {System.out.println("MAYORQ");}; 
-MENORIGQ 	:  '<=' {System.out.println("MENORIGQ");};  
-MAYORIGQ 	:  '>=' {System.out.println("MAYORIGQ");};
-
-
-// OPERADORES DE COMPARACION
-//-----------------------------------------------
-IGUAL 		:  '==' {System.out.println("IGUAL");};
-DIFERENTE	:  '!=' {System.out.println("DIFERENTE");};
+ARITH_OP    : ( MAS | PROD | DIV | MOD)             {System.out.println("ARITH_OP");};
+REL_OP      : MENORQ | MAYORQ | MENORIGQ | MAYORIGQ {System.out.println("ARITH_REL");};
+EQ_OP       : IGUAL | DIFERENTE                     {System.out.println("EQ_OP");};
 
 // OPERADORES LOGICOS
-//-----------------------------------------------
-AND 		:  '&&' {System.out.println("AND");};
-OR 			:  '||' {System.out.println("OR");};
-NOT 		:  '!' {System.out.println("NOT");};
+NOT     :  '!'             {System.out.println("NOT");};
+COND_OP : AND | OR | NOT   {System.out.println("COND_OP");};
 
 // OPERADORES DE ASIGNACION
 //-----------------------------------------------
-ASIGNACION	:  '=' {System.out.println("ASIGNACION");};
+ASIGNACION	:  '='  {System.out.println("ASIGNACION");};
 INCREMENTA  :  '+=' {System.out.println("INCREMENTA");};
 DECREMENTA  :  '-=' {System.out.println("DECREMENTA");};
-
-
-// LITERALES
-//-----------------------------------------------
-CHAR_LITERAL        : ('\'')CHAR('\'') {System.out.println("LITERAL CHAR");};
-STRING_LITERAL      : ('"') CHAR CHAR* ('"') {System.out.println("LITERAL STR");};
-BOOL_LITERAL        : TRUE | FALSE {System.out.println("LITERAL BOOLEAN");};
-INT_LITERAL          : (DECIMAL | HEXA)  {System.out.println("INT_LITERAL");};
-HEXA                 : ('0x'|'0X') (DIGITO | 'A'..'F' | 'a'..'f' )+ {System.out.println("HEX");};;
-
-fragment CHAR        :(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'));
-
   
 // AGRUPADORES
 //-----------------------------------------------
-LBRACE      :  '{' {System.out.println("LLAVE I");};
-RBRACE      :  '}' {System.out.println("LLAVE D");};
-LBRACKET    :  '[' {System.out.println("CORCHETE I");};
-RBRACKET    :  ']' {System.out.println("CORCHETE D");};
-LPARENTH    :  '(' {System.out.println("PARENT I");};
-RPARENTH    :  ')' {System.out.println("PARENT D");};
-
+LBRACE      :  '{' {System.out.println("LBRACE");};
+RBRACE      :  '}' {System.out.println("RBRACE");};
+LBRACKET    :  '[' {System.out.println("LBRACKET");};
+RBRACKET    :  ']' {System.out.println("RBRACKET");};
+LPARENTH    :  '(' {System.out.println("LPARENTH");};
+RPARENTH    :  ')' {System.out.println("RPARENTH");};
 
 // IDENTIFICADOR
 //-----------------------------------------------
-ID          :   (ALFA)(ALFA|DIGITO)* {System.out.println("ID");};
+ID          : (ALFA)(ALFA|DIGITO)*   {System.out.println("IDENTIFICADOR");};
 
 
-// OTROS
+
+fragment DIGITO	    : '0'..'9';
+fragment ALFA       : ('a'..'z' | 'A'..'Z' | '_' );
+fragment BOOLEAN    :  'boolean';
+fragment INT        :  'int';
+fragment DECIMAL    : (DIGITO) (DIGITO)* ;
+fragment MAS		:  '+';
+MENOS               :  '-'                {System.out.println("MENOS");};
+fragment PROD		:  '*';
+fragment DIV		:  '/';
+fragment MOD		:  '%';
+// OPERADORES RELACIONALES
 //-----------------------------------------------
-WS          : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
-COMMA       :  ',' {System.out.println("COMMA");};
-COLON		:  ':' {System.out.println("COLON");};
-SEMI        :  ';' {System.out.println("PUNTO Y COMMA");};
-DIGITO	    :  '0'..'9' {System.out.println("DIGITO");};
-ALFA        :  ('a'..'z' | 'A'..'Z' | '_' ) {System.out.println("ALFA");};
+fragment MENORQ     :  '<';
+fragment MAYORQ     :  '>'; 
+fragment MENORIGQ   :  '<=';  
+fragment MAYORIGQ   :  '>=';
+// OPERADORES DE COMPARACION
+//-----------------------------------------------
+fragment IGUAL 		:  '==';
+fragment DIFERENTE	:  '!=';
+// OPERADORES LOGICOS
+//-----------------------------------------------
+fragment AND :  '&&';
+fragment OR  :  '||';
