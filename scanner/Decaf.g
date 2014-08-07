@@ -48,13 +48,13 @@ fragment CHAR        :(('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'));
 
 // OPERADORES ARITMETICOS
 //-----------------------------------------------
-ARITH_OP    : ( MAS | PROD | DIV | MOD)             {System.out.println("ARITH_OP");};
-REL_OP      : MENORQ | MAYORQ | MENORIGQ | MAYORIGQ {System.out.println("ARITH_REL");};
-EQ_OP       : IGUAL | DIFERENTE                     {System.out.println("EQ_OP");};
+ARITH_OP    : (MAS | PROD | DIV | MOD)                {System.out.println("ARITH_OP");};
+REL_OP      : (MENORQ | MAYORQ | MENORIGQ | MAYORIGQ) {System.out.println("REL_OP");};
+EQ_OP       : (IGUAL | DIFERENTE)                     {System.out.println("EQ_OP");};
 
 // OPERADORES LOGICOS
 NOT     :  '!'             {System.out.println("NOT");};
-COND_OP : AND | OR | NOT   {System.out.println("COND_OP");};
+COND_OP : (AND | OR | NOT)   {System.out.println("COND_OP");};
 
 // OPERADORES DE ASIGNACION
 //-----------------------------------------------
