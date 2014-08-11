@@ -1,3 +1,2 @@
-Linea: 1, rol: 1, lexema: class
-Linea: 2, rol: 2, lexema: void
-Linea: 3, rol: 13, lexema: int
+Linea: 1, rol: 37, lexema: Program
+Linea: 2, rol: 32, lexema: }

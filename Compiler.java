@@ -159,7 +159,7 @@ public class Compiler{
 			PrintWriter wr = new PrintWriter(bw);				
 			
 			if (opcionTarget.equals("scan") | opcionTarget.equals("parse") | opcionTarget.equals("ast") | opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
-				scnnr = new Scanner(archivoEntrada); //wr.write("stage:scan \n"); //escribimos <stage> en archivo de salida
+				scnnr = new Scanner(archivoEntrada);
 				miListadeTokens = scnnr.ListaDeTokens();
 				//System.out.println(miListadeTokens);
 				if (opcionTarget.equals("scan")){
