@@ -1,2 +1,8 @@
-Linea: 1, rol: 37, lexema: Program
-Linea: 2, rol: 32, lexema: }
+Linea: 1, rol: 33, lexema: Program
+Linea: 2, rol: 2, lexema: void
+Linea: 2, rol: 31, lexema: (
+Linea: 2, rol: 27, lexema: {
+Linea: 3, rol: 33, lexema: i
+Linea: 3, rol: 17, lexema: 0
+Linea: 4, rol: 28, lexema: }
+Linea: 5, rol: -1, lexema: <EOF>

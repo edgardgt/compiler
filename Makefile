@@ -4,6 +4,7 @@ Compiler.class: Compiler.java
 	javac Compiler.java
 scanner\Decaf.java: scanner\Decaf.g
 	java -jar c:\Javalib\antlr-4.1-complete.jar scanner\Decaf.g
+	java -jar c:\Javalib\antlr-4.1-complete.jar parser\DecafParser.g
 	
 scanner\Decaf.class: scanner\Decaf.java
 	javac scanner\Decaf.java
@@ -41,7 +42,7 @@ lib\ErrorHandler.class: lib\ErrorHandler.java
 clean:
 	del Compiler.class
 	del scanner\*.class scanner\Decaf.java scanner\*.tokens
-	del parser\*.class parser\Decaf*.java parser\Decaf*.tokens
+	del parser\*.class parser\Decaf*.java parser\CC4Parser*
 	del ast\Ast.class
 	del semantic\Semantic.class
 	del irt\Irt.class
