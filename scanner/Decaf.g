@@ -29,7 +29,7 @@ TIPO        :  INT | BOOLEAN ;
 CHAR_LITERAL        : ('\'')CHAR('\'') ;
 STRING_LITERAL      : ('"') CHAR CHAR* ('"') ;
 BOOL_LITERAL        : TRUE | FALSE;
-INT_LITERAL          : (DECIMAL | HEXA);   //{System.out.println("INT_LITERAL");};
+INT_LITERAL          : (DECIMAL | HEXA);   
 HEXA                 : ('0x'|'0X') (DIGITO | 'A'..'F' | 'a'..'f' )+ ;
 
 fragment CHAR        :(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'));
@@ -37,7 +37,7 @@ fragment CHAR        :(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u
 
 // OPERADORES ARITMETICOS
 //-----------------------------------------------
-ARITH_OP    : ( MAS | PROD | DIV | MOD);   //{System.out.println("ARITH_OP");};
+ARITH_OP    : ( MAS | PROD | DIV | MOD);
 REL_OP       : MENORQ | MAYORQ | MENORIGQ | MAYORIGQ;
 EQ_OP         : IGUAL | DIFERENTE;
 
@@ -79,7 +79,7 @@ fragment BOOLEAN     :  'boolean';
 fragment INT         :  'int';
 fragment DECIMAL    : (DIGITO) (DIGITO)* ;
 fragment MAS		:  '+';
-MENOS      :  '-';                //{System.out.println("MENOS");};
+MENOS      :  '-'; 
 fragment PROD		:  '*';
 fragment DIV		:  '/';
 fragment MOD		:  '%';

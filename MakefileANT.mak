@@ -1,18 +1,21 @@
-make: scanner\Decaf.java parser\DecafParser.java parser\DecafParser.class parser\CC4Parser.class  Compiler.class
-
+make: scanner\Decaf.java scanner\Decaf.class scanner\Scanner.class parser\DecafParser.java parser\DecafParser.class Compiler.class parser\CC4Parser.class ast\Ast.class semantic\Semantic.class irt\Irt.class codegen\Codegen.class opt\Algebraic.class opt\ConstantFolding.class lib\Debug.class lib\ErrorHandler.class
+	
 Compiler.class: Compiler.java
 	javac Compiler.java
 
 scanner\Decaf.java: scanner\Decaf.g
 	java -jar c:\Javalib\antlr-4.1-complete.jar scanner\Decaf.g
+	
+scanner\Decaf.class: scanner\Decaf.java
 	javac scanner\Decaf.java
+	
+scanner\Scanner.class: scanner\Scanner.java
 	javac scanner\Scanner.java
 
 parser\DecafParser.java: parser\DecafParser.g
-	java -jar c:\Javalib\antlr-4.1-complete.jar parser\DecafParser.g -lib scanner\
-	
-parser\DecafParser.class: parser\DecafParser.java
-	javac parser\DecafParser.java
+	java -jar c:\Javalib\antlr-4.1-complete.jar parser\DecafParser.g -lib \parser\Decaf.tokens
+
+parser\CC4Parser.class: parser\CC4Parser.java
 	javac parser\CC4Parser.java
 	
 ast\Ast.class: ast\Ast.java
@@ -42,7 +45,7 @@ lib\ErrorHandler.class: lib\ErrorHandler.java
 clean:
 	del Compiler.class
 	del scanner\*.class scanner\Decaf.java scanner\*.tokens
-	del parser\*.class parser\Decaf*.java parser\Decaf*.tokens
+	del parser\*.class parser\Decaf*.java parser\CC4Parser*
 	del ast\Ast.class
 	del semantic\Semantic.class
 	del irt\Irt.class
