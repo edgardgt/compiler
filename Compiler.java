@@ -158,6 +158,7 @@ public class Compiler{
 			BufferedWriter bw = new BufferedWriter(w);
 			PrintWriter wr = new PrintWriter(bw);				
 			
+			System.out.print(opcionTarget);
 			if (opcionTarget.equals("scan") | opcionTarget.equals("parse") | opcionTarget.equals("ast") | opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
 				scnnr = new Scanner(archivoEntrada);
 				miListadeTokens = scnnr.ListaDeTokens();
@@ -178,11 +179,22 @@ public class Compiler{
 				}				
 			if (opcionTarget.equals("parse") | opcionTarget.equals("ast") | opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
 				prsr = new CC4Parser(scnnr); //wr.write("stage:parse \n"); //escribimos <stage> en archivo de salida
-				//Agregar aqui asignacion de lista de reglas de parser
-				//Agregar valdacion e target= parser
+				miListadeReglas = prsr.ListaDeReglas();
+				if (opcionTarget.equals("parse")){
+					for (Iterator i = miListadeReglas.iterator(); i.hasNext();) {
+						String reglaI = (String) i.next();
+						wr.write(reglaI+"\n"); // impresion a archivo
+						}
+					}
+
+
 				if (opcionDebug.contains("parse")) {
 					System.out.println("Debugging parse");
-						// Agregar aqui iteracion For
+
+					for (Iterator i = miListadeReglas.iterator(); i.hasNext();) {
+						String reglaI = (String) i.next();
+						System.out.println(reglaI); // debug a pantalla
+						}
 					} //imprime debug <stage> a pantalla
 				}
 			if (opcionTarget.equals("ast") | opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
@@ -191,7 +203,7 @@ public class Compiler{
 				}
 				
 			if (opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
-				smntc = new Semantic(ast); wr.write("stage:semantic \n"); //escribimos <stage> en archivo de salida
+				smntc = new Semantic(ast); wr.write("stage:se+mantic \n"); //escribimos <stage> en archivo de salida
 				if (opcionDebug.contains("semantic")) {System.out.println("Debugging semantic");} //imprime debug <stage> a pantalla
 				}
 				
