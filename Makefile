@@ -9,7 +9,7 @@ scanner\Decaf.java: scanner\Decaf.g
 	javac scanner\Scanner.java
 
 parser\DecafParser.java: parser\DecafParser.g
-	java -jar c:\Javalib\antlr-4.1-complete.jar parser\DecafParser.g -lib scanner\
+	java -jar c:\Javalib\antlr-4.1-complete.jar parser\DecafParser.g -visitor -lib scanner\
 	
 parser\DecafParser.class: parser\DecafParser.java
 	javac parser\DecafParser.java
