@@ -20,19 +20,6 @@ public class DecafParserBaseListener implements DecafParserListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterMethod_param(@NotNull DecafParser.Method_paramContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitMethod_param(@NotNull DecafParser.Method_paramContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterLocation(@NotNull DecafParser.LocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -176,6 +163,19 @@ public class DecafParserBaseListener implements DecafParserListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterExpr_2(@NotNull DecafParser.Expr_2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitExpr_2(@NotNull DecafParser.Expr_2Context ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterLiteral(@NotNull DecafParser.LiteralContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -183,19 +183,6 @@ public class DecafParserBaseListener implements DecafParserListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitLiteral(@NotNull DecafParser.LiteralContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void enterArray(@NotNull DecafParser.ArrayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitArray(@NotNull DecafParser.ArrayContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
