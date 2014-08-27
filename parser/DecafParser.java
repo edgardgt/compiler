@@ -139,7 +139,7 @@ public class DecafParser extends Parser {
 				_la = _input.LA(1);
 			}
 			setState(45); match(RBRACE);
-			 linea++; arbol.add("start "+linea);
+			 linea++; arbol.add(linea+": start");
 			}
 		}
 		catch (RecognitionException re) {
@@ -251,7 +251,7 @@ public class DecafParser extends Parser {
 				_la = _input.LA(1);
 			}
 			setState(69); match(SEMI);
-			 linea++; arbol.add("field_decl " + linea);
+			 linea++; arbol.add(linea+": field_decl");
 			}
 		}
 		catch (RecognitionException re) {
@@ -344,7 +344,7 @@ public class DecafParser extends Parser {
 
 			setState(87); match(RPARENTH);
 			setState(88); block();
-			 linea++; arbol.add("method_decl " + linea);
+			 linea++; arbol.add(linea+": method_decl ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -427,7 +427,7 @@ public class DecafParser extends Parser {
 				_la = _input.LA(1);
 			}
 			setState(104); match(RBRACE);
-			 linea++; arbol.add("block "+linea);
+			 linea++; arbol.add(linea+": block ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -497,7 +497,7 @@ public class DecafParser extends Parser {
 				_la = _input.LA(1);
 			}
 			setState(116); match(SEMI);
-			 linea++; arbol.add("var_decl " + linea);
+			 linea++; arbol.add(linea+": var_decl ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -649,7 +649,7 @@ public class DecafParser extends Parser {
 				}
 				break;
 			}
-			 linea++; arbol.add("statement "+linea);
+			 linea++; arbol.add(linea+": statement ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -699,7 +699,7 @@ public class DecafParser extends Parser {
 			_errHandler.recoverInline(this);
 			}
 			consume();
-			 linea++; arbol.add("assign_op "+linea);
+			 linea++; arbol.add(linea+": assign_op ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -811,7 +811,7 @@ public class DecafParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			 linea++; arbol.add("method_call "+linea);
+			 linea++; arbol.add(linea+": method_call ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -853,7 +853,7 @@ public class DecafParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(191); match(ID);
-			 linea++; arbol.add("method_name "+linea);
+			 linea++; arbol.add(linea+": method_name ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -911,7 +911,7 @@ public class DecafParser extends Parser {
 				setState(196); match(LBRACKET);
 				setState(197); match(INT_LITERAL);
 				setState(198); match(RBRACKET);
-				 linea++; arbol.add("location "+linea);
+				 linea++; arbol.add(linea+": location ");
 				}
 				break;
 			}
@@ -1017,7 +1017,7 @@ public class DecafParser extends Parser {
 			}
 			setState(215); expr_2();
 			}
-			 linea++; arbol.add("expr   "+linea);
+			 linea++; arbol.add(linea+": expr   ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -1078,7 +1078,7 @@ public class DecafParser extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				 linea++; arbol.add("expr_2 "+linea);
+				 linea++; arbol.add(linea+": expr_2 ");
 				}
 				break;
 			}
@@ -1141,7 +1141,7 @@ public class DecafParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(227); match(STRING_LITERAL);
-				 linea++; arbol.add("callout_arg "+linea);
+				 linea++; arbol.add(linea+": callout_arg ");
 				}
 				break;
 			default:
@@ -1196,7 +1196,7 @@ public class DecafParser extends Parser {
 			_errHandler.recoverInline(this);
 			}
 			consume();
-			 linea++; arbol.add("bin_op "+linea);
+			 linea++; arbol.add(linea+": bin_op ");
 			}
 		}
 		catch (RecognitionException re) {
@@ -1246,7 +1246,7 @@ public class DecafParser extends Parser {
 			_errHandler.recoverInline(this);
 			}
 			consume();
-			 linea++; arbol.add("literal "+linea);
+			 linea++; arbol.add(linea+": literal ");
 			}
 		}
 		catch (RecognitionException re) {
