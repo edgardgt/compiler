@@ -13,7 +13,7 @@ options {
 LinkedList arbol = new LinkedList();
 int linea = 0;
 }
-start       : CLASE ID LBRACE (field_decl)* (method_decl)* RBRACE             { linea++; arbol.add(linea+": start");} ;
+start       : (CLASE ID LBRACE (field_decl)* (method_decl)* RBRACE)            { linea++; arbol.add(linea+": start");} ;
 
 field_decl  : TIPO ( ID | ID LBRACKET INT_LITERAL RBRACKET ) 
                      (COMMA ( ID | ID LBRACKET INT_LITERAL RBRACKET ))* SEMI  { linea++; arbol.add(linea+": field_decl");} ;
@@ -68,3 +68,4 @@ bin_op      : (ARITH_OP
 literal     : (INT_LITERAL 
             |  CHAR_LITERAL 
             |  BOOL_LITERAL)                                                  { linea++; arbol.add(linea+": literal ");} ;
+

@@ -14,15 +14,16 @@ import compiler.opt.*;
 public class Compiler{
 
 	public static void main(String[] args) throws Exception {
-		Boolean puedeEjecutar = true; // Indicara si el programa puede ejecutarse si y solo si, los argumentos son validos
-		String archivoSalida = new String(""); //almacena el nombre del archivo donde quedara la salida
-		String opcionTarget = new String(""); //almacena el parametro de la opcion -target
-		String opcionOpt = new String(""); //almacena el parametro de la opcion -opt
-		ArrayList<String> opcionDebug = new ArrayList<String>(); //almacena parametro(s) de opcion debug, se usa un ArrayList porque pueden ser uno o mas
-		ArrayList<String> accionesEjecutar = new ArrayList<String>(); //almacena que opciones del compilador deben ser ejecutadas. Depende de los argumentos ingresados
+		Boolean argsValidos = true; // Indica si los argumentos de entrada son validos o no. Si son validos esta variable se utiliza para permitir la ejecucion del programa
 		String archivoEntrada = new String(""); //almacena el nombre del archivo de entrada
+		String archivoSalida = new String(""); //almacena el nombre del archivo donde quedara la salida
+		String argTarget = new String(""); //almacena argumnto -target
+		String argOpt = new String(""); //almacena argumento -opt
+		ArrayList<String> fasesDebug = new ArrayList<String>(); //almacena parametro(s) de opcion debug, se usa un ArrayList porque pueden ser uno o mas
+		ArrayList<String> accionesEjecutar = new ArrayList<String>(); //almacena que opciones del compilador deben ser ejecutadas. Depende de los argumentos ingresados en opcion -target
 		LinkedList<MiToken> miListadeTokens = new LinkedList<MiToken>(); //almacena lista de tokens
 		LinkedList<String> miListadeReglas = new LinkedList<String>(); //almacena lista de reglas del parser
+		//ArrayList<String> fasesCompilador = new ArrayList<String>(); //lista de las fases del compilador
 
 		Scanner scnnr=null;
 		CC4Parser prsr=null;
@@ -31,20 +32,20 @@ public class Compiler{
 		Irt irt=null;
 		Codegen cdgn=null;
 		
-		ArrayList<String> fasesCompilador = new ArrayList<String>(); //lista de las fases del compilador
-		fasesCompilador.add("scan");
-		fasesCompilador.add("parse");
-		fasesCompilador.add("ast");
-		fasesCompilador.add("semantic");
-		fasesCompilador.add("irt");
-		fasesCompilador.add("codegen");
+		
+		//fasesCompilador.add("scan");
+		//fasesCompilador.add("parse");
+		//fasesCompilador.add("ast");
+		//fasesCompilador.add("semantic");
+		//fasesCompilador.add("irt");
+		//fasesCompilador.add("codegen");
 		File fileSalida; // variable para archivo de salida
 		
 		// Inicia analisis del argumento args
 		int argsAnalizar = args.length - 1;
 		
 		if (argsAnalizar < 0){ // si el numero de argumentos a analizar es menor a 0, no debe continuar con el analisis de args
-			puedeEjecutar = false;
+			argsValidos = false;
 			//System.exit(0);
 		}else if (argsAnalizar == 0){ //si tiene un unico parametro debe ser el archivo de entrada, por lo tanto los argumentos a analizar es 0
 			archivoEntrada = args[0];
@@ -52,77 +53,77 @@ public class Compiler{
 			boolean continuar = true; int i = 0;
 			// lectura del ultimo argumento, se asume que es el archivo de entrada
 			if (args[args.length-1].charAt(0) != '-'){ archivoEntrada = args[args.length-1];
-			}else{ continuar = false; puedeEjecutar = false;
+			}else{ continuar = false; argsValidos = false;
 			}
 			
 			// analisis de los argumentos del primero hasta el penultimo, (no se analiza el ultimo debido a que es el archivo de entrada)
 			while (continuar && i<argsAnalizar){
 				if (args[i].equals("-o")){  
 					if (argsAnalizar-i == 1){ // analiza que aun se pueda leer otro parametro
-						continuar = false; puedeEjecutar = false; // si no hay mas parametros, se termina el analisis
+						continuar = false; argsValidos = false; // si no hay mas parametros, se termina el analisis
 						}else{
 							i++; //avanza una posicion para leer el siguiente parametro (debe ser el nombre del archivo de salida)
 							if (args[i].charAt(0) == '-'){ //si este parametro empieza con '-', se termina la ejecucion porque no es una entrada valida
 								archivoSalida = "";
-								continuar = false; puedeEjecutar = false;
+								continuar = false; argsValidos = false;
 							}else{ // si el paramerto es valido, se almacena en archivoSalida
 								archivoSalida = args[i];
 								}
 						}
 				} else if(args[i].equals("-target") || args[i].equals("-opt") || args[i].equals("-debug") ){
 					if (argsAnalizar-i == 1){ // analiza que aun se pueda leer otro parametro
-						continuar = false; puedeEjecutar = false; // si no hay mas parametros, se termina el analisis
+						continuar = false; argsValidos = false; // si no hay mas parametros, se termina el analisis
 						}else{ // si hay mas parametros que leer:
 							if (args[i].equals("-target")){
 								if(args[i+1].equals("scan") || args[i+1].equals("parse") || args[i+1].equals("ast") || args[i+1].equals("semantic") || args[i+1].equals("irt") || args[i+1].equals("codegen")){
-									opcionTarget = args[i+1]; //almacena en opcionTarget, el valor recibido de parametro
+									argTarget = args[i+1]; //almacena en argTarget, el valor recibido de parametro
 									if (accionesEjecutar.contains("-target")){ 
 										 accionesEjecutar.remove("-target");
 									}
 									accionesEjecutar.add("-target");
 									i++;
 								}else{
-									opcionTarget = "";
-									continuar = false; puedeEjecutar = false;
+									argTarget = "";
+									continuar = false; argsValidos = false;
 								}
 							} else if (args[i].equals("-opt")){
 								if(args[i+1].equals("constant") || args[i+1].equals("algebraic")){
-									opcionOpt = args[i+1];
+									argOpt = args[i+1];
 									if (accionesEjecutar.contains("-opt")){
 										 accionesEjecutar.remove("-opt");
 									}
 									accionesEjecutar.add("-opt");
 									i++;
 								}else{
-									opcionOpt = "";
-									continuar = false; puedeEjecutar = false;
+									argOpt = "";
+									continuar = false; argsValidos = false;
 								}
 							} else if (args[i].equals("-debug")){
-								opcionDebug.clear(); //limpia ArrayList de opciones Debug
+								fasesDebug.clear(); //limpia ArrayList de opciones Debug
 								boolean puedeDebuguear = true; String tokenActual ="";
 								StringTokenizer st = new StringTokenizer(args[i+1], ":");
 								while (st.hasMoreTokens() && puedeDebuguear) {
 									tokenActual = st.nextToken();
 									if (tokenActual.equals("scan") || tokenActual.equals("parse") || tokenActual.equals("ast") || tokenActual.equals("semantic") || tokenActual.equals("irt") || tokenActual.equals("codegen")){
-										if (opcionDebug.contains(tokenActual)){
-											opcionDebug.remove(tokenActual);
+										if (fasesDebug.contains(tokenActual)){
+											fasesDebug.remove(tokenActual);
 										}
-										opcionDebug.add(tokenActual); // si es un valor valido para -debug, lo ingresa a ArrayList de opciones Debug
+										fasesDebug.add(tokenActual); // si es un valor valido para -debug, lo ingresa a ArrayList de opciones Debug
 										if (accionesEjecutar.contains("-debug")){
 											accionesEjecutar.remove("-debug");
 										}
 										accionesEjecutar.add("-debug");
 									}else{ // si hay un valor que no es valido, debe terminar el analisis.
-										opcionDebug.clear();
-										puedeEjecutar = false; puedeDebuguear = false;
-										continuar = false; puedeEjecutar = false; puedeDebuguear = false;
+										fasesDebug.clear();
+										argsValidos = false; puedeDebuguear = false;
+										continuar = false; argsValidos = false; puedeDebuguear = false;
 									}
 								}
 								i++;
 							}
 						}
 				} else{
-					continuar = false; puedeEjecutar = false;
+					continuar = false; argsValidos = false;
 				}
 				i++;
 			}
@@ -130,12 +131,12 @@ public class Compiler{
 		
 		File fichero = new File(archivoEntrada);
 		if (!fichero.exists()){
-			puedeEjecutar = false;
+			argsValidos = false;
 			System.out.println("");
 			System.out.println("El archivo de entrada '" + fichero + "' no existe.\n");
 			} //si no existe archivo de entrada, no debe ejecutar.
 		
-		if (!(puedeEjecutar)){
+		if (!(argsValidos)){
 			Help();
 		}else {
 			
@@ -143,33 +144,33 @@ public class Compiler{
 			/*
 			System.out.println("acciones a Ejecutar: " + accionesEjecutar);
 			if (archivoSalida != "") {System.out.println("-o: --->" + archivoSalida);}
-			if (opcionTarget != "") {System.out.println("-target: --->" + opcionTarget);}
-			if (opcionOpt != "") {System.out.println("-opt: --->" + opcionOpt);}
-			if (!(opcionDebug.isEmpty())) {System.out.println("-debug: --->" + opcionDebug);}
+			if (argTarget != "") {System.out.println("-target: --->" + argTarget);}
+			if (argOpt != "") {System.out.println("-opt: --->" + argOpt);}
+			if (!(fasesDebug.isEmpty())) {System.out.println("-debug: --->" + fasesDebug);}
 			if (archivoEntrada != "") {System.out.println("entrada: --->" + archivoEntrada);}
-			System.out.println("puede ejecutar: " + puedeEjecutar);
+			System.out.println("puede ejecutar: " + argsValidos);
 			*/
 
 			//prepara el archivo de salida para escritura
 			if (archivoSalida.equals("")){archivoSalida = "salidadefault.txt";} // escribe salida a archivo default
-			if (opcionTarget.equals("")){opcionTarget = "scan";} //si el usuario no coloca target, el default para esta fase es "scan"
+			if (argTarget.equals("")){argTarget = "scan";} //si el usuario no coloca target, el default para esta fase es "scan"
 			fileSalida = new File(archivoSalida);
 			FileWriter w = new FileWriter(fileSalida);
 			BufferedWriter bw = new BufferedWriter(w);
 			PrintWriter wr = new PrintWriter(bw);				
 			
-			System.out.print(opcionTarget);
-			if (opcionTarget.equals("scan") | opcionTarget.equals("parse") | opcionTarget.equals("ast") | opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
+			System.out.print(argTarget);
+			if (argTarget.equals("scan") | argTarget.equals("parse") | argTarget.equals("ast") | argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
 				scnnr = new Scanner(archivoEntrada);
 				miListadeTokens = scnnr.ListaDeTokens();
-				//System.out.println(miListadeTokens);
-				if (opcionTarget.equals("scan")){
+				//System.out.println("Lista de Tokens:" + miListadeTokens);
+				if (argTarget.equals("scan")){
 					for (Iterator i = miListadeTokens.iterator(); i.hasNext();) {
 						MiToken tokenI = (MiToken) i.next();
 						wr.write(tokenI.toString()); // impresion a archivo
 						}
 					}
-				if (opcionDebug.contains("scan")) {
+				if (fasesDebug.contains("scan")) {
 					System.out.println("Debugging scan");
 					for (Iterator i = miListadeTokens.iterator(); i.hasNext();) {
 						MiToken tokenI = (MiToken) i.next();
@@ -177,10 +178,11 @@ public class Compiler{
 						}				
 					} //imprime debug <stage> a pantalla
 				}				
-			if (opcionTarget.equals("parse") | opcionTarget.equals("ast") | opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
+			if (argTarget.equals("parse") | argTarget.equals("ast") | argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
 				prsr = new CC4Parser(scnnr); //wr.write("stage:parse \n"); //escribimos <stage> en archivo de salida
 				miListadeReglas = prsr.ListaDeReglas();
-				if (opcionTarget.equals("parse")){
+				//System.out.println("Lista de Reglas:" + miListadeReglas + "\n\r");
+				if (argTarget.equals("parse")){
 					for (Iterator i = miListadeReglas.iterator(); i.hasNext();) {
 						String reglaI = (String) i.next();
 						wr.write(reglaI+"\n"); // impresion a archivo
@@ -188,7 +190,7 @@ public class Compiler{
 					}
 
 
-				if (opcionDebug.contains("parse")) {
+				if (fasesDebug.contains("parse")) {
 					System.out.println("Debugging parse");
 
 					for (Iterator i = miListadeReglas.iterator(); i.hasNext();) {
@@ -197,29 +199,29 @@ public class Compiler{
 						}
 					} //imprime debug <stage> a pantalla
 				}
-			if (opcionTarget.equals("ast") | opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
+			if (argTarget.equals("ast") | argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
 				ast = new Ast(prsr); wr.write("stage:ast \n"); //escribimos <stage> en archivo de salida
-				if (opcionDebug.contains("ast")) {System.out.println("Debugging ast");} //imprime debug <stage> a pantalla
+				if (fasesDebug.contains("ast")) {System.out.println("Debugging ast");} //imprime debug <stage> a pantalla
 				}
 				
-			if (opcionTarget.equals("semantic") | opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
+			if (argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
 				smntc = new Semantic(ast); wr.write("stage:se+mantic \n"); //escribimos <stage> en archivo de salida
-				if (opcionDebug.contains("semantic")) {System.out.println("Debugging semantic");} //imprime debug <stage> a pantalla
+				if (fasesDebug.contains("semantic")) {System.out.println("Debugging semantic");} //imprime debug <stage> a pantalla
 				}
 				
-			if (opcionTarget.equals("irt") | opcionTarget.equals("codegen")){
+			if (argTarget.equals("irt") | argTarget.equals("codegen")){
 				irt = new Irt(smntc); wr.write("stage:irt \n"); //escribimos <stage> en archivo de salida
-				if (opcionDebug.contains("irt")) {System.out.println("Debugging irt");} //imprime debug <stage> a pantalla
+				if (fasesDebug.contains("irt")) {System.out.println("Debugging irt");} //imprime debug <stage> a pantalla
 				}
 				
-			if (opcionTarget.equals("codegen")){
+			if (argTarget.equals("codegen")){
 				cdgn = new Codegen(irt); wr.write("stage:codegen \n"); //escribimos <stage> en archivo de salida
-				if (opcionDebug.contains("codegen")) {System.out.println("Debugging codegen");} //imprime debug <stage> a pantalla
+				if (fasesDebug.contains("codegen")) {System.out.println("Debugging codegen");} //imprime debug <stage> a pantalla
 				}
 			
-			if (opcionOpt.equals("constant")){
+			if (argOpt.equals("constant")){
 				ConstantFolding  cf = new ConstantFolding(); wr.write("optimizing: constant folding \n"); //escribimos <optimizing> en archivo de salida
-			}else if(opcionOpt.equals("algebraic")){
+			}else if(argOpt.equals("algebraic")){
 				Algebraic  algb = new Algebraic(); wr.write("optimizing: algebraic simplification \n"); //escribimos <optimizing> en archivo de salida
 			}
 			wr.close(); //cierra archivo
