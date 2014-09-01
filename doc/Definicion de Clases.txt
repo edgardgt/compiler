@@ -1,0 +1,35 @@
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+CLASE:		Compiler
+ATRIBUTOS	argsValidos		: Indica si los argumentos de entrada son validos o no. Si son validos permmitira ejecutar el programa, si no, lo abortara.
+			archivoEntrada	: Almacena el nombre del archivo de entrada
+			archivoSalida	: Almacena el nombre del archivo donde quedara la salida
+			argTarget		: Almacena el valor asignado al argumento -target
+			argOpt			: Almacena el valor asignado al argumento -opt
+			fasesDebug		: Almacena todas las fases del compilador a las que se les debe realizar Debug (se puee debuggear mas de una fase)
+			accionesEjecutar: Almacena las opciones del compilador que eben ser ejecutadas. Depende de los argumentos ingresados en opcion -target
+			miListadeTokens : Lista utilizada para almacenar los tokens del programa de entrada
+			miListadeReglas : Lista utilizada para almacenar las reglas el parser
+METODOS:	NO HAY
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+CLASE		Scanner
+ATRIBUTOS	lexer1			: Apuntador a lista de Tokens, para recorrerla
+			lexer2			: Apuntador a lista de Tokens, para recorrerla
+			file			: Nombre del archvo donde se encuentran los Tokens
+			miListadeTokens	: Apuntador a Listado de Tokens
+METODOS:	Scanner()		:
+			Start()			:
+			lexer()			:
+			entrada()		:
+			ListaDeTokens()	:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+CLASE		MiToken
+ATRIBUTOS	linea
+			tipo
+			texto
+METODOS		MiToken()
+			getLinea()
+			getTipo()
+			getTexto()
+			toString()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
