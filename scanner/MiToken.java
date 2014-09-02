@@ -2,13 +2,13 @@ package compiler.scanner;
 
 // clase MiToken
 public class MiToken {
-	//campos
+	//Atributos
 	private int linea;
 	private int tipo;
 	private String texto;
-
-	//constructores
+	
 	public MiToken(int linea, int tipo, String texto) {
+		//constructor
 		this.linea = linea;
 		this.tipo = tipo;
 		this.texto = new String(texto);
