@@ -1,4 +1,4 @@
-
+DEFINICION DE LAS CLASES 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 CLASE:		Compiler
 ATRIBUTOS	argsValidos		: Indica si los argumentos de entrada son validos o no. Si son validos permmitira ejecutar el programa, si no, lo abortara.
@@ -17,19 +17,25 @@ ATRIBUTOS	lexer1			: Apuntador a lista de Tokens, para recorrerla
 			lexer2			: Apuntador a lista de Tokens, para recorrerla
 			file			: Nombre del archvo donde se encuentran los Tokens
 			miListadeTokens	: Apuntador a Listado de Tokens
-METODOS:	Scanner()		:
-			Start()			:
-			lexer()			:
-			entrada()		:
-			ListaDeTokens()	:
+METODOS:	Scanner()		: Constructor
+			Start()			: Obtiene el listado de tokens del archivoEntrada, lexer1 apunta a dicha lista
+			lexer()			: Retorna un apuntador a la lista de tokens
+			ListaDeTokens()	: Recorre el archivo de entrada y arma una lista de tokens en miListadeTokens
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 CLASE		MiToken
-ATRIBUTOS	linea
-			tipo
-			texto
-METODOS		MiToken()
-			getLinea()
-			getTipo()
-			getTexto()
-			toString()
+ATRIBUTOS	linea			: Indica la linea que esta siendo analizada
+			tipo			: Codigo del lexema
+			texto			: Lexema
+METODOS		MiToken()		: Constructor
+			getLinea()		: Retorna el numero de linea que esta siendo analizada
+			getTipo()		: Retorna el Codigo el lexema encontrado
+			getTexto()		: Retorna el Lexema Encontrado
+			toString()		: Retorna el conjunto Linea, Tipo y Lexema encontrado
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+CLASE		CC4Parser
+ATRIBUTOS	miParser		: Apuntador a lista de reglas del Parser
+			miListadeReglas	: Almacena reglas del parser visitadas
+METODOS		CC4Parser()		: Constructor
+			ListaDeReglas()	: Retorna el apuntador al listado de reglas
+			Parser()		: Retorna apuntador a reglas del Parser
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
