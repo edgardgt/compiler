@@ -1,0 +1,17 @@
+class Program {
+  
+  void primo(int n) {
+	int fact;
+	fact = -1;
+    for i = 1, n {
+		for j = 1, m {
+			fact=fact*i;
+		}
+    }
+	return fact;
+  }
+
+  void main() {
+    callout("El primo es", primo(10));
+  }
+}

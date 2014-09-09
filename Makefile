@@ -1,4 +1,4 @@
-make: scanner\Decaf.java parser\DecafParser.java parser\DecafParser.class parser\CC4Parser.class  Compiler.class
+make: scanner\Decaf.java parser\DecafParser.java parser\DecafParser.class ast\Root.class ast\AstVisitor.class ast\Ast.class Compiler.class
 
 Compiler.class: Compiler.java
 	javac Compiler.java
@@ -14,6 +14,28 @@ parser\DecafParser.java: parser\DecafParser.g
 parser\DecafParser.class: parser\DecafParser.java
 	javac parser\DecafParser.java
 	javac parser\CC4Parser.java
+	
+ast\Root.class: ast\Root.java
+	javac ast\Root.java
+	javac ast\BinOp.java
+	javac ast\IntLiteral.java
+	javac ast\CharLiteral.java
+	javac ast\Identificador.java
+	javac ast\MethodDcl.java
+	javac ast\Parametro.java
+	javac ast\Nulo.java
+	javac ast\Bloque.java
+	javac ast\NLista.java
+	javac ast\ClassMain.java
+	javac ast\SentenciaIF.java
+	javac ast\Location.java
+	javac ast\Return.java
+	javac ast\MethodCall.java
+	javac ast\Asignacion.java
+	javac ast\SentenciaFor.java
+	
+ast\AstVisitor.class: ast\AstVisitor.java
+	javac ast\AstVisitor.java
 	
 ast\Ast.class: ast\Ast.java
 	javac ast\Ast.java

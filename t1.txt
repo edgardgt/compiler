@@ -1,6 +1,14 @@
 class Program {
+
+  int primo(int n) {
+	int fact[10]=1;
+	fact = -1;
+
+	return fact;
+  }
+
   void main() {
     int i;
-	i = 0+5*2;
+	i=fact[1];
   }
 }

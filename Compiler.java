@@ -33,12 +33,6 @@ public class Compiler{
 		Codegen cdgn=null;
 		
 		
-		//fasesCompilador.add("scan");
-		//fasesCompilador.add("parse");
-		//fasesCompilador.add("ast");
-		//fasesCompilador.add("semantic");
-		//fasesCompilador.add("irt");
-		//fasesCompilador.add("codegen");
 		File fileSalida; // variable para archivo de salida
 		
 		// Inicia analisis del argumento args
@@ -200,9 +194,18 @@ public class Compiler{
 					} //imprime debug <stage> a pantalla
 				}
 			if (argTarget.equals("ast") | argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
-				ast = new Ast(prsr); wr.write("stage:ast \n"); //escribimos <stage> en archivo de salida
-				if (fasesDebug.contains("ast")) {System.out.println("Debugging ast");} //imprime debug <stage> a pantalla
+				ast = new Ast(prsr); //wr.write("stage:ast \n"); //escribimos <stage> en archivo de salida
+				//edg:08/SEP/2014: ini: Se agrega llamada al AST
+				if (opcionTarget.equals("ast")){
+						wr.write(ast.arbolSTR()); // impresion a archivo
+					}
+				if (fasesDebug.contains("ast")) {
+					//System.out.println(ast.arbolSTR());
+					ast.arbolAST().print();
+					//System.out.println("Debugging ast");
+					} //imprime debug <stage> a pantalla
 				}
+				//edg:08/SEP/2014: FIN: Se agrega llamada al AST
 				
 			if (argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
 				smntc = new Semantic(ast); wr.write("stage:se+mantic \n"); //escribimos <stage> en archivo de salida

@@ -1,0 +1,21 @@
+class Program {
+  boolean b;
+  int a;
+  int b[5];
+  int j;
+  
+  int abs(int a) {
+    b = a < 0;
+	b = 2/1+1*-36-25;
+    if (b) {
+      return -a;
+    }
+    else {
+      return a;
+    }
+  }
+
+  void main() {
+    abs(-5);
+  }
+}

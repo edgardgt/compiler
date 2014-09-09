@@ -1,8 +1,21 @@
-Linea: 1, rol: 33, lexema: Program
-Linea: 2, rol: 2, lexema: void
-Linea: 2, rol: 31, lexema: (
-Linea: 2, rol: 27, lexema: {
-Linea: 3, rol: 33, lexema: i
-Linea: 3, rol: 17, lexema: 0
-Linea: 4, rol: 28, lexema: }
-Linea: 6, rol: -1, lexema: <EOF>
+Regla de parser: 1: assign_op 
+Regla de parser: 2: literal 
+Regla de parser: 3: expr_2 
+Regla de parser: 4: expr   
+Regla de parser: 5: expr_2 
+Regla de parser: 6: expr   
+Regla de parser: 7: statement 
+Regla de parser: 8: expr_2 
+Regla de parser: 9: expr   
+Regla de parser: 10: statement 
+Regla de parser: 11: block 
+Regla de parser: 12: method_decl 
+Regla de parser: 13: var_decl 
+Regla de parser: 14: assign_op 
+Regla de parser: 15: location 
+Regla de parser: 16: expr_2 
+Regla de parser: 17: expr   
+Regla de parser: 18: statement 
+Regla de parser: 19: block 
+Regla de parser: 20: method_decl 
+Regla de parser: 21: start
