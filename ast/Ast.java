@@ -16,6 +16,8 @@ public class Ast{
 		miParser.reset();
 		tree = miParser.start();
 		treeString = new String(tree.toStringTree(miParser));
+		//System.out.println(tree.toStringTree(miParser)); 
+		//System.out.println(treeString);
 		
 		AstVisitor visitor = new AstVisitor();
 		

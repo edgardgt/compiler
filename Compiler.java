@@ -23,15 +23,17 @@ public class Compiler{
 		ArrayList<String> accionesEjecutar = new ArrayList<String>(); //almacena que opciones del compilador deben ser ejecutadas. Depende de los argumentos ingresados en opcion -target
 		LinkedList<MiToken> miListadeTokens = new LinkedList<MiToken>(); //almacena lista de tokens
 		LinkedList<String> miListadeReglas = new LinkedList<String>(); //almacena lista de reglas del parser
-		//ArrayList<String> fasesCompilador = new ArrayList<String>(); //lista de las fases del compilador
 
+		//ArrayList<String> fasesCompilador = new ArrayList<String>(); //lista de las fases del compilador
 		Scanner scnnr=null;
 		CC4Parser prsr=null;
 		Ast ast=null;
 		Semantic smntc=null;
 		Irt irt=null;
 		Codegen cdgn=null;
+
 		
+
 		
 		File fileSalida; // variable para archivo de salida
 		
@@ -124,10 +126,15 @@ public class Compiler{
 		}
 		
 		File fichero = new File(archivoEntrada);
+
+
 		if (!fichero.exists()){
 			argsValidos = false;
 			System.out.println("");
 			System.out.println("El archivo de entrada '" + fichero + "' no existe.\n");
+
+
+
 			} //si no existe archivo de entrada, no debe ejecutar.
 		
 		if (!(argsValidos)){
@@ -155,6 +162,7 @@ public class Compiler{
 			
 			System.out.print(argTarget);
 			if (argTarget.equals("scan") | argTarget.equals("parse") | argTarget.equals("ast") | argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
+
 				scnnr = new Scanner(archivoEntrada);
 				miListadeTokens = scnnr.ListaDeTokens();
 				//System.out.println("Lista de Tokens:" + miListadeTokens);
@@ -182,11 +190,8 @@ public class Compiler{
 						wr.write(reglaI+"\n"); // impresion a archivo
 						}
 					}
-
-
 				if (fasesDebug.contains("parse")) {
 					System.out.println("Debugging parse");
-
 					for (Iterator i = miListadeReglas.iterator(); i.hasNext();) {
 						String reglaI = (String) i.next();
 						System.out.println(reglaI); // debug a pantalla
@@ -195,8 +200,7 @@ public class Compiler{
 				}
 			if (argTarget.equals("ast") | argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
 				ast = new Ast(prsr); //wr.write("stage:ast \n"); //escribimos <stage> en archivo de salida
-				//edg:08/SEP/2014: ini: Se agrega llamada al AST
-				if (opcionTarget.equals("ast")){
+				if (argTarget.equals("ast")){
 						wr.write(ast.arbolSTR()); // impresion a archivo
 					}
 				if (fasesDebug.contains("ast")) {
@@ -205,40 +209,57 @@ public class Compiler{
 					//System.out.println("Debugging ast");
 					} //imprime debug <stage> a pantalla
 				}
-				//edg:08/SEP/2014: FIN: Se agrega llamada al AST
 				
 			if (argTarget.equals("semantic") | argTarget.equals("irt") | argTarget.equals("codegen")){
-				smntc = new Semantic(ast); wr.write("stage:se+mantic \n"); //escribimos <stage> en archivo de salida
+				/*smntc = new Semantic(ast); wr.write("stage:semantic \n"); //escribimos <stage> en archivo de salida
 				if (fasesDebug.contains("semantic")) {System.out.println("Debugging semantic");} //imprime debug <stage> a pantalla
+				*/
 				}
 				
 			if (argTarget.equals("irt") | argTarget.equals("codegen")){
-				irt = new Irt(smntc); wr.write("stage:irt \n"); //escribimos <stage> en archivo de salida
+				/*irt = new Irt(smntc); wr.write("stage:irt \n"); //escribimos <stage> en archivo de salida
 				if (fasesDebug.contains("irt")) {System.out.println("Debugging irt");} //imprime debug <stage> a pantalla
+				*/
 				}
 				
 			if (argTarget.equals("codegen")){
+				/*
 				cdgn = new Codegen(irt); wr.write("stage:codegen \n"); //escribimos <stage> en archivo de salida
 				if (fasesDebug.contains("codegen")) {System.out.println("Debugging codegen");} //imprime debug <stage> a pantalla
+				*/
 				}
 			
 			if (argOpt.equals("constant")){
+				/*
 				ConstantFolding  cf = new ConstantFolding(); wr.write("optimizing: constant folding \n"); //escribimos <optimizing> en archivo de salida
 			}else if(argOpt.equals("algebraic")){
 				Algebraic  algb = new Algebraic(); wr.write("optimizing: algebraic simplification \n"); //escribimos <optimizing> en archivo de salida
+				*/
 			}
+			
 			wr.close(); //cierra archivo
 			bw.close(); //cierra bufferwriter
+			System.out.println ("\nArchivo " + archivoSalida + " generado.");
 		}
+		
 	}
 	
 	private static void Help() throws Exception{
 		System.out.println("Compiler, debe ejecutarse de la siguiente manera: ");
 		System.out.println("");
 		System.out.println("java Compiler [-o out_filename] [-target stage] [-opt optimization] [-debug stage] [-h] <in_filename>");
+
+
+
+
+
+
 		System.out.println("");
 		
 		System.out.println("-o out_filename:   Nombre el archivo en el que se almacenara la salida. ");
+
+
+
 		System.out.println("-target stage:     Compila hasta cualquiera de las fases del compilador:");
 		System.out.println("                        scan");
 		System.out.println("                        parse");

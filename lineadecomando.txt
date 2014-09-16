@@ -1,0 +1,3 @@
+c:\cc4\compiler> make clean
+c:\cc4\compiler> make
+c:\cc4\compiler> java Compiler t1.txt

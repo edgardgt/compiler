@@ -1,8 +1,7 @@
 class Program {
-  void primo() {
-	int fact;
-	fact = 1;
-	
-	
-	}
+  void main() {
+    int i;
+	i = 2%5+4;  // prueba
+	j = 2+5%4*3/5;  // prueba
+  }
 }

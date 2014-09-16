@@ -1,8 +1,11 @@
 lexer grammar Decaf;
- 
+
 @header{
     package compiler.scanner;
 }
+
+
+
 
 //PALABRAS RESERVADAS
 //-----------------------------------------------
@@ -17,8 +20,7 @@ RETURN		:  'return';
 BREAK		:  'break';
 CONTINUE	:  'continue';
 CALLOUT	    :  'callout';
-COMMA       :  ',';
-
+COMMA       : ',';
 //-----------------------------------------------
 TIPO        :  INT | BOOLEAN ;
 
@@ -30,7 +32,7 @@ TIPO        :  INT | BOOLEAN ;
 CHAR_LITERAL        : ('\'')CHAR('\'') ;
 STRING_LITERAL      : ('"') CHAR CHAR* ('"') ;
 BOOL_LITERAL        : TRUE | FALSE;
-INT_LITERAL          : (DECIMAL | HEXA);   
+INT_LITERAL          : (DECIMAL | HEXA);   //{System.out.println("INT_LITERAL");};
 HEXA                 : ('0x'|'0X') (DIGITO | 'A'..'F' | 'a'..'f' )+ ;
 
 fragment CHAR        :(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u007E'));
@@ -38,7 +40,7 @@ fragment CHAR        :(('\u0020')|('\u0021')|('\u0023'..'\u0026')|('\u0028'..'\u
 
 // OPERADORES ARITMETICOS
 //-----------------------------------------------
-ARITH_OP    : ( MAS | PROD | DIV | MOD);
+ARITH_OP    : ( MAS );   //{System.out.println("ARITH_OP");};
 REL_OP       : MENORQ | MAYORQ | MENORIGQ | MAYORIGQ;
 EQ_OP         : IGUAL | DIFERENTE;
 
@@ -80,10 +82,10 @@ fragment BOOLEAN     :  'boolean';
 fragment INT         :  'int';
 fragment DECIMAL    : (DIGITO) (DIGITO)* ;
 fragment MAS		:  '+';
-MENOS      :  '-'; 
-fragment PROD		:  '*';
-fragment DIV		:  '/';
-fragment MOD		:  '%';
+MENOS      :  '-';                //{System.out.println("MENOS");};
+PROD		:  '*';
+DIV		:  '/';
+MOD		:  '%';
 // OPERADORES RELACIONALES
 //-----------------------------------------------
 fragment MENORQ 		:  '<';
